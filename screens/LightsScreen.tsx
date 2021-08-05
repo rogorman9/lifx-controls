@@ -13,6 +13,7 @@ export default function LightsScreen({
   const [lights, setLghts] = useState<Light[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const getInitialData = async () => {
+    // blah
     setIsLoading(true)
     let response: Light[] | undefined
     try {
