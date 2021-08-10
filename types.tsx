@@ -31,7 +31,7 @@ export type Light = {
     kelvin: number
   }
   brightness: number
-  effect: string
+  effect?: string
   group: {
     id: string
     name: string
@@ -48,7 +48,9 @@ export type Light = {
       has_color: boolean
       has_variable_color_temp: boolean
       has_ir: boolean
+      has_hev: boolean
       has_chain: boolean
+      has_matrix: boolean
       has_multizone: boolean
       min_kelvin: number
       max_kelvin: number

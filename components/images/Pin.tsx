@@ -33,7 +33,7 @@ const getTranslateY = (labelLength: number) => {
 
 export default function Pin({ fillColor = '#000000', label, style }: Props) {
   return (
-    <View style={style} pointerEvents="none">
+    <View style={style} pointerEvents="none" testID="color-pin">
       {/* Using viewBox to crop the SVG since it has a bunch of empty space */}
       <Svg viewBox="158 87 1086 1830">
         <Path
