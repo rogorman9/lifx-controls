@@ -30,7 +30,6 @@ export default function ColorWheel({ light, onColorChange }: Props) {
   const [{ x, y }, setTapCoords] = useState(
     convertHSToXY(light.color.hue, light.color.saturation, colorWheelSize / 2)
   )
-  console.log('coords', x, y)
   return (
     <Pressable
       onPress={(event: GestureResponderEvent) => {
