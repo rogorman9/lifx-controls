@@ -25,7 +25,7 @@ const getTranslateY = (labelLength: number) => {
     case 2:
       return 0
     case 3:
-      return -75
+      return -50
     default:
       return 100
   }
@@ -51,9 +51,8 @@ export default function Pin({ fillColor = '#000000', label, style }: Props) {
           strokeWidth="10"
           fontSize={getFontSize(label.length)}
           x="701"
-          y={800}
+          y={800 + getTranslateY(label.length)}
           textAnchor="middle"
-          translateY={getTranslateY(label.length)}
           fontWeight="bold"
         >
           {label}
