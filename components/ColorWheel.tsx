@@ -33,8 +33,11 @@ export default function ColorWheel({ light, onColorChange }: Props) {
   return (
     <Pressable
       onPress={(event: GestureResponderEvent) => {
-        const { locationX, locationY } = event.nativeEvent
-        const { hue, saturation } = convertXYToHS(locationX, locationY, colorWheelSize / 2)
+        // The type for onPress appears to be incorrect; layerX and layerY are present on web
+        const { locationX, locationY, layerX, layerY } = event.nativeEvent as any
+        const x = locationX || layerX
+        const y = locationY || layerY
+        const { hue, saturation } = convertXYToHS(x, y, colorWheelSize / 2)
         // Don't register clicks outside the circle
         if (saturation <= 1) {
           try {
@@ -42,7 +45,7 @@ export default function ColorWheel({ light, onColorChange }: Props) {
           } catch {
             return
           }
-          setTapCoords({ x: locationX, y: locationY })
+          setTapCoords({ x: x, y: y })
           onColorChange(hue, saturation)
         }
       }}
