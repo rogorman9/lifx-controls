@@ -2,8 +2,8 @@ import { hsv, rgb } from 'color-convert'
 import kelvinToRgb from 'kelvin-to-rgb'
 import { Light } from '../types'
 
-export const getColorHex = (light: Light): string => {
-  if (light.power === 'off') {
+export const getColorHex = (light: Light, ignorePower?: boolean): string => {
+  if (!ignorePower && light.power === 'off') {
     return '#000000'
   }
   // When light is in "white" mode, saturation is 0

@@ -25,7 +25,7 @@ const KelvinSlider: React.FunctionComponent<KelvinSliderProps> = ({ light, onCol
           setColor(light, 0, 0, value)
         }}
         onValueChange={onColorChange}
-        thumbTintColor={getColorHex(light)}
+        thumbTintColor={getColorHex(light, true)}
         thumbSize={inKelvinMode ? 48 : 0}
         value={light.color.kelvin}
         trackHeight={10}
