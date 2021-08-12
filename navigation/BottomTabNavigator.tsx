@@ -20,6 +20,7 @@ export default function BottomTabNavigator() {
       initialRouteName="Lights"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerShown: false,
       }}
     >
       <BottomTab.Screen
