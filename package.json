@@ -17,7 +17,9 @@
     "@react-navigation/bottom-tabs": "^6.0.3",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.4",
+    "@sharcoux/slider": "^5.4.3",
     "color-convert": "^2.0.1",
+    "debounce": "^1.2.1",
     "expo": "^42.0.3",
     "expo-asset": "^8.3.3",
     "expo-constants": "^11.0.1",
@@ -31,15 +33,16 @@
     "react-dom": "^17.0.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-svg": "^12.1.1",
-    "react-native-web": "^0.17.1",
-    "react-native-safe-area-context": "3.2.0"
+    "react-native-web": "^0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@testing-library/react-native": "^7.2.0",
     "@types/color-convert": "^2.0.0",
+    "@types/debounce": "^1.2.0",
     "@types/jest": "^26.0.24",
     "@types/react": "^17.0.16",
     "@types/react-native": "^0.64.12",

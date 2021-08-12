@@ -21,7 +21,7 @@ type Props = {
 }
 
 const { width, height } = Dimensions.get('window')
-const colorWheelSize = Math.min(width, height)
+const colorWheelSize = Math.min(width, height, 800)
 
 const PIN_WIDTH = 48
 const PIN_HEIGHT = 80
@@ -30,6 +30,7 @@ export default function ColorWheel({ light, onColorChange }: Props) {
   const [{ x, y }, setTapCoords] = useState(
     convertHSToXY(light.color.hue, light.color.saturation, colorWheelSize / 2)
   )
+  const inColorMode = light.color.saturation !== 0
   return (
     <Pressable
       onPress={(event: GestureResponderEvent) => {
@@ -51,17 +52,19 @@ export default function ColorWheel({ light, onColorChange }: Props) {
       }}
     >
       <ImageBackground source={colorWheelImage} style={styles.colorWheel}>
-        <Pin
-          fillColor={getColorHex(light)}
-          label="SL"
-          style={[
-            styles.pinIcon,
-            {
-              left: x - PIN_WIDTH / 2,
-              top: y - PIN_HEIGHT,
-            },
-          ]}
-        />
+        {inColorMode && (
+          <Pin
+            fillColor={getColorHex(light)}
+            label="SL"
+            style={[
+              styles.pinIcon,
+              {
+                left: x - PIN_WIDTH / 2,
+                top: y - PIN_HEIGHT,
+              },
+            ]}
+          />
+        )}
       </ImageBackground>
     </Pressable>
   )

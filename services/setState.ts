@@ -12,12 +12,12 @@ export async function toggleLight(light: Light): Promise<void> {
   })
 }
 
-export async function setColor(light: Light, hue: number, saturation: number) {
+export async function setColor(light: Light, hue: number, saturation: number, kelvin?: number) {
   await fetch(`${LIFX_API_URL}/lights/id:${light.id}/state`, {
     method: 'PUT',
     headers: { ...authHeaders, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      color: `hue:${hue} saturation:${saturation}`,
+      color: kelvin ? `kelvin:${kelvin.toFixed()}` : `hue:${hue} saturation:${saturation}`,
       fast: true,
     }),
   })
