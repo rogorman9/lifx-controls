@@ -1,10 +1,11 @@
 import { RouteProp } from '@react-navigation/core'
 import React, { useState } from 'react'
-import { Button, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { Switch } from 'react-native-gesture-handler'
 import ColorWheel from '../components/ColorWheel'
 import KelvinSlider from '../components/KelvinSlider'
 import { View } from '../components/Themed'
-import { toggleLight } from '../services/setState'
+import { setPower } from '../services/setState'
 import { LightsParamList, Power } from '../types'
 import { getColorHex } from '../utils/colors'
 
@@ -14,25 +15,29 @@ type Props = {
 
 export default function EditLightScreen({ route }: Props) {
   const [light, setLight] = useState(route.params.light)
+  const [isPowerLoading, setIsPowerLoading] = useState(false)
   return (
     <View style={styles.container}>
-      <View style={styles.powerButton}>
-        <Button
-          title="Power"
-          color={getColorHex(light)}
-          onPress={async () => {
-            try {
-              await toggleLight(light)
-            } catch (err) {
-              return
-            }
-            // The GET response doesn't update right away, need to keep track of state locally :(
-            const power: Power = light.power === 'on' ? 'off' : 'on'
-            const lightCopy = { ...light, power }
-            setLight(lightCopy)
-          }}
-        />
-      </View>
+      <Switch
+        style={styles.switch}
+        value={light.power === 'on'}
+        disabled={isPowerLoading}
+        onValueChange={async (value: boolean) => {
+          setIsPowerLoading(true)
+          const power: Power = value ? 'on' : 'off'
+          try {
+            await setPower(light, power)
+          } catch (err) {
+            return
+          }
+          // The GET response doesn't update right away, need to keep track of state locally :(
+          const lightCopy = { ...light, power }
+          setLight(lightCopy)
+          setIsPowerLoading(false)
+        }}
+        trackColor={{ true: getColorHex(light) }}
+        thumbColor={light.power === 'on' ? getColorHex(light) : 'gainsboro'}
+      />
       <ColorWheel
         light={light}
         onColorChange={(hue, saturation) => {
@@ -57,7 +62,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  powerButton: {
+  switch: {
+    transform: [{ scale: 2 }, { rotate: '270deg' }],
     marginBottom: 32,
   },
 })
