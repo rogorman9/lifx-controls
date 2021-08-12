@@ -11,7 +11,9 @@ describe('<ColorWheel />', () => {
     const { style } = component.getByTestId('color-pin').props
     expect(style).toEqual(
       expect.arrayContaining([
-        expect.arrayContaining([expect.objectContaining({ left: 351, top: 295 })]),
+        expect.arrayContaining([
+          expect.objectContaining({ left: 538.2745492941698, top: 285.8079824485823 }),
+        ]),
       ])
     )
   })

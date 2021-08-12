@@ -8,7 +8,7 @@ export const mockLightA: Light = {
   power: 'off',
   color: {
     hue: 2.81,
-    saturation: 0,
+    saturation: 0.5,
     kelvin: 5000,
   },
   brightness: 1,
