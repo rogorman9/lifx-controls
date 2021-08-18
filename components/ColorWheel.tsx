@@ -26,6 +26,13 @@ const colorWheelSize = Math.min(width, height, 800)
 const PIN_WIDTH = 48
 const PIN_HEIGHT = 80
 
+const getInitials = (name: string): string => {
+  const splitName = name.trim().split(/\s+/)
+  const initialsArr = splitName.map((word: string) => word[0]?.toUpperCase())
+  // Limit label to 3 characters for now
+  return initialsArr.slice(0, 3).join('')
+}
+
 export default function ColorWheel({ light, onColorChange }: Props) {
   const [{ x, y }, setTapCoords] = useState(
     convertHSToXY(light.color.hue, light.color.saturation, colorWheelSize / 2)
@@ -55,7 +62,7 @@ export default function ColorWheel({ light, onColorChange }: Props) {
         {inColorMode && (
           <Pin
             fillColor={getColorHex(light)}
-            label="SL"
+            label={getInitials(light.label)}
             style={[
               styles.pinIcon,
               {
