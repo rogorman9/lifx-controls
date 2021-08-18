@@ -1,7 +1,6 @@
 import React from 'react'
 import Slider from '@sharcoux/slider'
 import { ImageBackground, StyleSheet } from 'react-native'
-import debounce from 'debounce'
 import { setColor } from '../services/setState'
 import { Light } from '../types'
 import { getColorHex } from '../utils/colors'
