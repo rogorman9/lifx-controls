@@ -1,7 +1,7 @@
 import { Light } from '../types'
 
 export const mockLightA: Light = {
-  id: 'd073d52412fe',
+  id: 'abcde12345',
   uuid: '62e8e2b2-64b1-4397-b4cd-bcca46a3cf5e',
   label: 'Light A',
   connected: true,
@@ -43,7 +43,7 @@ export const mockLightA: Light = {
 }
 
 export const mockLightB: Light = {
-  id: 'd073d528500c',
+  id: '12345abcde',
   uuid: '5804bdaf-634c-478f-bb15-4f7242c36398',
   label: 'Light B',
   connected: true,
