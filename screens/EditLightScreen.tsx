@@ -2,6 +2,7 @@ import { RouteProp } from '@react-navigation/core'
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { Switch } from 'react-native-gesture-handler'
+import BrightnessSlider from '../components/BrightnessSlider'
 import ColorWheel from '../components/ColorWheel'
 import KelvinSlider from '../components/KelvinSlider'
 import { View } from '../components/Themed'
@@ -22,6 +23,7 @@ export default function EditLightScreen({ route }: Props) {
         style={styles.switch}
         value={light.power === 'on'}
         disabled={isPowerLoading}
+        // TODO: make this update faster without getting out of sync
         onValueChange={async (value: boolean) => {
           setIsPowerLoading(true)
           const power: Power = value ? 'on' : 'off'
@@ -38,32 +40,51 @@ export default function EditLightScreen({ route }: Props) {
         trackColor={{ true: getColorHex(light) }}
         thumbColor={light.power === 'on' ? getColorHex(light) : 'gainsboro'}
       />
+      <View style={styles.brightnessSlider}>
+        <BrightnessSlider
+          light={light}
+          onBrightnessChange={(brightness: number) => {
+            setLight({ ...light, brightness })
+          }}
+        />
+      </View>
       <ColorWheel
         light={light}
         onColorChange={(hue, saturation) => {
           setLight({ ...light, color: { ...light.color, hue, saturation } })
         }}
       />
-      <KelvinSlider
-        light={light}
-        onColorChange={(kelvin) => {
-          // LIFX API sets saturation to 0 when updating color with kelvin
-          setLight({ ...light, color: { ...light.color, saturation: 0, kelvin } })
-        }}
-      />
+      <View style={styles.kelvinSlider}>
+        <KelvinSlider
+          light={light}
+          onColorChange={(kelvin) => {
+            // LIFX API sets saturation to 0 when updating color with kelvin
+            setLight({ ...light, color: { ...light.color, saturation: 0, kelvin } })
+          }}
+        />
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  brightnessSlider: {
+    width: '85%',
+    height: 50,
+    marginVertical: 24,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  kelvinSlider: {
+    width: '85%',
+    marginTop: 24,
+  },
 
   switch: {
     transform: [{ scale: 2 }, { rotate: '270deg' }],
-    marginBottom: 32,
+    marginBottom: 24,
   },
 })

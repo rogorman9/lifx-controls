@@ -8,7 +8,8 @@ export const getColorHex = (light: Light, ignorePower?: boolean): string => {
   }
   // When light is in "white" mode, saturation is 0
   if (light.color.saturation > 0) {
-    return `#${hsv.hex([light.color.hue, light.color.saturation * 100, light.brightness * 100])}`
+    // Always use full brightness for display purposes (otherwise you get dimmed/inaccurate colors in UI)
+    return `#${hsv.hex([light.color.hue, light.color.saturation * 100, 100])}`
   }
   return `#${rgb.hex(kelvinToRgb(light.color.kelvin))}`
 }
