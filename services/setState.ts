@@ -1,5 +1,6 @@
+import { LIFX_API_URL } from '@env'
 import { Light, Power } from '../types'
-import { authHeaders, LIFX_API_URL } from './common'
+import { authHeaders } from './common'
 
 export async function setPower(light: Light, power: Power): Promise<void> {
   await fetch(`${LIFX_API_URL}/lights/id:${light.id}/state`, {
