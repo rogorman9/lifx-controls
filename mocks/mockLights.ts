@@ -5,7 +5,7 @@ export const mockLightA: Light = {
   uuid: '62e8e2b2-64b1-4397-b4cd-bcca46a3cf5e',
   label: 'Light A',
   connected: true,
-  power: 'off',
+  power: 'on',
   color: {
     hue: 2.81,
     saturation: 0.5,
