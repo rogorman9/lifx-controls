@@ -1,17 +1,10 @@
 import React, { useState } from 'react'
-import {
-  Dimensions,
-  GestureResponderEvent,
-  Image,
-  ImageBackground,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-} from 'react-native'
+import { GestureResponderEvent, ImageBackground, Pressable, StyleSheet } from 'react-native'
 import { setColor } from '../services/setState'
 import { Light } from '../types'
 import { convertHSToXY, convertXYToHS, getColorHex } from '../utils/colors'
 import Pin from './images/Pin'
+import Layout from '../constants/Layout'
 
 const colorWheelImage = require('../assets/images/color-wheel.png')
 
@@ -20,7 +13,9 @@ type Props = {
   onColorChange: (hue: number, saturation: number) => void
 }
 
-const { width, height } = Dimensions.get('window')
+const {
+  window: { width, height },
+} = Layout
 const colorWheelSize = Math.min(width, height, 800)
 
 const PIN_WIDTH = 48
